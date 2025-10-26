@@ -22,14 +22,12 @@
                         <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
                         <h5>Login Page</h5>
                     </div>
-                    
-                    <%
-                    String succMsg = (String)session.getAttribute("succMsg");
-                    if (succMsg != null) {
-                    %>
-                        <h4 class="text-center text-danger"><%= succMsg %></h4>
-                        <% session.removeAttribute("succMsg"); %>
-                    <% } %>
+                    <c:if test="${not empty msg}">
+                        <h4 class="text-center text-danger">${msg}</h4>
+                        <c:remove var="msg" scope="session" />
+                    </c:if>
+                       
+                        
 
                     <form action="login" method="post">
                         <div class="form-group">

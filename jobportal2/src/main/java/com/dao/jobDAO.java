@@ -69,6 +69,34 @@ public class jobDAO {
 
 	    return list;
 	}
+	
+	public List<Jobs> getJobsByStatus() {
+	    List<Jobs> list = new ArrayList<Jobs>();
+	    Jobs j = null;
+
+	    try {
+	        String sql = "select * from jobs where status=?";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, "Active");
+	        ResultSet rs = ps.executeQuery();
+	      
+	        while (rs.next()) {
+	            j = new Jobs();
+	            j.setId(rs.getInt("id"));
+	            j.setTitle(rs.getString("title"));
+	            j.setDescription(rs.getString("description"));
+	            j.setCategory(rs.getString("category"));
+	            j.setStatus(rs.getString("status"));
+	            j.setLocation(rs.getString("location"));
+	            j.setPdate(rs.getTimestamp("pdate") + "");
+	            list.add(j);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
 	public Jobs getJobsById( int id) {
 	    
 	    Jobs j = null;
@@ -130,7 +158,7 @@ public boolean updateJobs(Jobs j) {
 		
 		
 		try {
-			String sql= "delete from jobs t WHERE id=?";
+			String sql= "delete from jobs  WHERE id=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			int i=ps.executeUpdate();
@@ -152,4 +180,66 @@ public boolean updateJobs(Jobs j) {
 	
 	
  
-}}
+}   
+   
+   public List<Jobs> getJobsByLocationORCategory(String location , String Category) {
+	    List<Jobs> list = new ArrayList<Jobs>();
+	    Jobs j = null;
+
+	    try {
+	        String sql = "select * from jobs where location=? or category=?" ;
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, location);
+	        ps.setString(2, Category);
+	        ResultSet rs = ps.executeQuery();
+	      
+	        while (rs.next()) {
+	            j = new Jobs();
+	            j.setId(rs.getInt("id"));
+	            j.setTitle(rs.getString("title"));
+	            j.setDescription(rs.getString("description"));
+	            j.setCategory(rs.getString("category"));
+	            j.setStatus(rs.getString("status"));
+	            j.setLocation(rs.getString("location"));
+	            j.setPdate(rs.getTimestamp("pdate") + "");
+	            list.add(j);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
+   
+   
+   public List<Jobs> getJobsByLocationAndCategory(String location , String Category) {
+	    List<Jobs> list = new ArrayList<Jobs>();
+	    Jobs j = null;
+
+	    try {
+	        String sql = "select * from jobs where location=? and category=?" ;
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, location);
+	        ps.setString(2, Category);
+	        ResultSet rs = ps.executeQuery();
+	      
+	        while (rs.next()) {
+	            j = new Jobs();
+	            j.setId(rs.getInt("id"));
+	            j.setTitle(rs.getString("title"));
+	            j.setDescription(rs.getString("description"));
+	            j.setCategory(rs.getString("category"));
+	            j.setStatus(rs.getString("status"));
+	            j.setLocation(rs.getString("location"));
+	            j.setPdate(rs.getTimestamp("pdate") + "");
+	            list.add(j);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
+   
+   
+}

@@ -22,12 +22,12 @@
                         <h5>Registration</h5>
                     </div>
                     
-                    <c:if test="${not empty succMsg}">
-                        <h4 class="text-center text-success">${succMsg}</h4>
-                        <c:remove var="succMsg" scope="session" />
+                    <c:if test="${not empty msg}">
+                        <h4 class="text-center text-success">${msg}</h4>
+                        <c:remove var="msg" scope="session" />
                     </c:if>
 
-                    <form action="register" method="post">
+                    <form action="add_user" method="post">
                         <div class="form-group">
                             <label>Enter Full Name</label>
                             <input type="text" required="required" class="form-control" name="name">

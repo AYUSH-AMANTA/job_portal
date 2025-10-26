@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.UserDAO;
+import com.db.db;
 import com.entity.User;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet{
@@ -23,12 +25,29 @@ public class LoginServlet extends HttpServlet{
 			User u = new User();
 			HttpSession session=req.getSession();
 			
-			if("ayush@gmail.com".equals(email) && "1234".equals(pass)) {
+			if("admin@gmail.com".equals(email) && "1234".equals(pass)) {
 				session.setAttribute("userobj", u);
 				u.setRole("admin");
 				resp.sendRedirect("admin.jsp");
 			}
 			else {
+				
+				UserDAO dao =new UserDAO(db.getconnet());
+				User user=dao.login(email, pass);
+				
+				if(user!=null) {
+					session.setAttribute("userobj", user);
+					resp.sendRedirect("home.jsp");
+					
+					
+				}
+				else {
+					session.setAttribute("msg", "Invalid email or password");
+					resp.sendRedirect("login.jsp");
+					
+				}
+				
+						
 				
 			}
 	
