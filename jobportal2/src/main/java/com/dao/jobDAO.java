@@ -152,4 +152,64 @@ public boolean updateJobs(Jobs j) {
 	
 	
  
-}}
+}
+   public List<Jobs> getJobsByLocationAndCategory(String loc, String cat) {
+	    List<Jobs> list = new ArrayList<>();
+	    Jobs j = null;
+
+	    try {
+	        String sql = "SELECT * FROM jobs WHERE location = ? AND category = ? ORDER BY id DESC";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, loc);
+	        ps.setString(2, cat);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            j = new Jobs();
+	            j.setId(rs.getInt("id"));
+	            j.setTitle(rs.getString("title"));
+	            j.setDescription(rs.getString("description"));
+	            j.setCategory(rs.getString("category"));
+	            j.setStatus(rs.getString("status"));
+	            j.setLocation(rs.getString("location"));
+	            j.setPdate(rs.getTimestamp("pdate") + "");
+	            list.add(j);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
+   
+   public List<Jobs> getJobsByLocationORCategory(String loc, String cat) {
+	    List<Jobs> list = new ArrayList<>();
+	    Jobs j = null;
+
+	    try {
+	        String sql = "SELECT * FROM jobs WHERE location = ? OR category = ? ORDER BY id DESC";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, loc);
+	        ps.setString(2, cat);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            j = new Jobs();
+	            j.setId(rs.getInt("id"));
+	            j.setTitle(rs.getString("title"));
+	            j.setDescription(rs.getString("description"));
+	            j.setCategory(rs.getString("category"));
+	            j.setStatus(rs.getString("status"));
+	            j.setLocation(rs.getString("location"));
+	            j.setPdate(rs.getTimestamp("pdate") + "");
+	            list.add(j);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
+}
