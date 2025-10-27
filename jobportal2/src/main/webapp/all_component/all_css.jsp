@@ -21,3 +21,42 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link rel="stylesheet" href="all_component/style.css" />
+
+<style>
+/* Default navbar link */
+.navbar-nav .nav-link {
+  color: #ffffff !important; /* white text */
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 15px;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Hover: invert colors */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  background-color: #ffffff; /* invert background */
+  color: #1a237e !important; /* invert text (deep navy to match your theme) */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Add underline animation */
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  bottom: 6px;
+  width: 0%;
+  height: 2px;
+  background-color: #1a237e; /* underline matches text color */
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 70%;
+}
+
+</style>
