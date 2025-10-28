@@ -23,18 +23,24 @@
         <li class="nav-item">
           <a class="nav-link" href="view_job.jsp"><i class="fa-solid fa-eye"></i> View Job</a>
         </li>
+        
+  <li class="nav-item">
+    <a class="nav-link" href="news"><i class="fa-solid fa-newspaper"></i> Articles & News</a>
+  </li>
       </c:if>
     </ul>
 
     <form class="form-inline my-2 my-lg-0">
     
-      <c:if test="${userobj != null}">
+      <c:if test="${userobj != null }">
         <a href="#" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user"></i>${userobj.name}  </a>
        
         <a href="logout" class="btn btn-danger">
           <i class="fa-solid fa-right-from-bracket"></i> Logout
         </a>
       </c:if>
+      
+      
 
     
       <c:if test="${userobj == null}">
